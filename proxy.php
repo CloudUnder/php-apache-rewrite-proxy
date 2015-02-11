@@ -4,6 +4,7 @@
 
 $upstream_base_url = 'http://127.0.0.1:9000';
 $timeout = 5; // seconds
+$latency = 0; // simulate latency; seconds
 
 
 /* Read incoming request */
@@ -12,6 +13,13 @@ $request_method = $_SERVER['REQUEST_METHOD'];
 $request_uri = $_SERVER['REQUEST_URI'];
 $request_headers = getallheaders();
 $request_body = file_get_contents('php://input');
+
+
+/* Simulate latency */
+
+if ($latency) {
+	sleep($latency);
+}
 
 
 /* Forward request */
