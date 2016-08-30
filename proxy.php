@@ -57,14 +57,20 @@ if ($response === false) {
 	$response_headers = explode("\n", substr($response, 0, $header_length));
 	$response_body = substr($response, $header_length);
 
-	foreach ($response_headers as $header) {
-		$header = trim($header);
-		if ($header) {
-			header(trim($header));
+	foreach ($response_headers as $i => $header) {
+
+		if($header = trim($header)){
+			
+			header($header);
 		}
 	}
-
+	
+	header_remove("Transfer-Encoding");
+	
 	echo $response_body;
 }
 
 curl_close($ch);
+flush();
+exit;
+die;
