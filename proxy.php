@@ -11,7 +11,13 @@ $latency = 0; // simulate latency; seconds
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 $request_uri = $_SERVER['REQUEST_URI'];
+
 $request_headers = getallheaders();
+$request_headers['Host']=parse_url($upstream_base_url, PHP_URL_HOST);
+$request_headers['X-forwarded-Host']=$_SERVER['HTTP_HOST'];
+$request_headers['X-forwarded-Host']=$_SERVER['HTTP_HOST'];
+$request_headers['X-forwarded-For']=$_SERVER['HTTP_HOST'];
+
 $request_body = file_get_contents('php://input');
 
 
